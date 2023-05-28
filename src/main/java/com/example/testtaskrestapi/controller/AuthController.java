@@ -3,8 +3,6 @@ package com.example.testtaskrestapi.controller;
 import com.example.testtaskrestapi.dto.JWTAuthResponse;
 import com.example.testtaskrestapi.dto.LoginDto;
 import com.example.testtaskrestapi.dto.RegisterDto;
-import com.example.testtaskrestapi.repository.RoleRepository;
-import com.example.testtaskrestapi.repository.UserRepository;
 import com.example.testtaskrestapi.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

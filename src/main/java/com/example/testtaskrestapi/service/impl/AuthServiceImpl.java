@@ -1,4 +1,4 @@
-package com.example.testtaskrestapi.service;
+package com.example.testtaskrestapi.service.impl;
 
 import com.example.testtaskrestapi.dto.RegisterDto;
 import com.example.testtaskrestapi.exception.APIException;
@@ -8,6 +8,7 @@ import com.example.testtaskrestapi.repository.RoleRepository;
 import com.example.testtaskrestapi.security.JwtTokenProvider;
 import com.example.testtaskrestapi.dto.LoginDto;
 import com.example.testtaskrestapi.repository.UserRepository;
+import com.example.testtaskrestapi.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +30,6 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
-
 
     public AuthServiceImpl(
             JwtTokenProvider jwtTokenProvider,

@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Setter
@@ -35,5 +38,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    private Collection<Post> posts;
 
 }
