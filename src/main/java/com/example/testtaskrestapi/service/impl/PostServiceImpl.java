@@ -6,8 +6,11 @@ import com.example.testtaskrestapi.model.User;
 import com.example.testtaskrestapi.repository.PostRepository;
 import com.example.testtaskrestapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +30,7 @@ public class PostServiceImpl implements PostService {
         newPost.setText(postDto.getText());
         newPost.setImage(postDto.getImage());
         newPost.setUser(user);
+        newPost.setDatePost(LocalDateTime.now());
         postRepository.save(newPost);
         return postDto;
     }
@@ -56,4 +60,5 @@ public class PostServiceImpl implements PostService {
             return "ok";
         } else return "You cannot delete this post";
     }
+
 }

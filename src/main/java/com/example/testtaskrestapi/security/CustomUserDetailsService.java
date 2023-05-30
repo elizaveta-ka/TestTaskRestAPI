@@ -36,4 +36,26 @@ public class CustomUserDetailsService implements UserDetailsService {
                 authorities
         );
     }
+
+    public void subscribe(User currentUser, User user) {
+        user.getSubscribers().add(currentUser);
+        userRepository.save(user);
+    }
+
+    public void unsubscribe(User currentUser, User user) {
+        user.getSubscribers().remove(currentUser);
+        userRepository.save(user);
+    }
+
+    public void addAsFriend(User currentUser, User user) {
+        user.getFriends().add(currentUser);
+        currentUser.getFriends().add(user);
+        userRepository.save(user);
+    }
+
+    public void removeFromFriends(User currentUser, User user) {
+        user.getFriends().remove(currentUser);
+        currentUser.getFriends().remove(user);
+        userRepository.save(user);
+    }
 }

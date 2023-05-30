@@ -3,6 +3,8 @@ package com.example.testtaskrestapi.service;
 import com.example.testtaskrestapi.dto.PostDto;
 import com.example.testtaskrestapi.model.Post;
 import com.example.testtaskrestapi.model.User;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
