@@ -3,6 +3,13 @@ package com.example.testtaskrestapi.controller;
 import com.example.testtaskrestapi.model.Post;
 import com.example.testtaskrestapi.repository.PostRepository;
 import com.example.testtaskrestapi.repository.UserRepository;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,7 +18,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
+@Tag(name="Feed Controller", description="User can view the activity feed of other users he is following")
 @RequestMapping("/api/auth")
 public class ActivityFeedController {
 
@@ -26,6 +35,7 @@ public class ActivityFeedController {
         this.userRepository = userRepository;
     }
 
+    @SecurityRequirement(name = "JWT")
     @GetMapping("/feed")
     public Page<Post> getFeed(@RequestParam(defaultValue = "0") int page,
                               @RequestParam(defaultValue = "2") int quantity,

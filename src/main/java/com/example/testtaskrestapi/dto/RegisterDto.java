@@ -1,28 +1,29 @@
 package com.example.testtaskrestapi.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Entity User for Register")
 public class RegisterDto {
 
-    @NotBlank
+    @NotEmpty(message = "Please provide a username")
+    @Size(min = 4, max = 10)
     private String username;
 
+    @NotEmpty(message = "Please provide a email")
     private String email;
 
-    @NotBlank
-    @Min(4)
-    @Max(10)
+    @NotEmpty(message = "Please provide a password")
+    @Size(min = 4, max = 10)
     private String password;
 }

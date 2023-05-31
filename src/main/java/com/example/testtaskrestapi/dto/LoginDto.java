@@ -1,5 +1,6 @@
 package com.example.testtaskrestapi.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Entity User for Login")
 public class LoginDto {
 
     @NotBlank

@@ -6,10 +6,8 @@ import com.example.testtaskrestapi.model.User;
 import com.example.testtaskrestapi.repository.PostRepository;
 import com.example.testtaskrestapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,8 +16,8 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-
     public PostServiceImpl(PostRepository postRepository) {
+
         this.postRepository = postRepository;
     }
 

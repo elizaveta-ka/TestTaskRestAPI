@@ -4,6 +4,9 @@ import com.example.testtaskrestapi.dto.JWTAuthResponse;
 import com.example.testtaskrestapi.dto.LoginDto;
 import com.example.testtaskrestapi.dto.RegisterDto;
 import com.example.testtaskrestapi.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +18,19 @@ import javax.validation.Valid;
 
 @AllArgsConstructor
 @Validated
+@ControllerAdvice
 @RestController
+@Tag(name="Authentication and Authorization Controller", description="Register/Login")
 @RequestMapping("/api/auth")
 public class AuthController {
 
     private AuthService authService;
 
+    @SecurityRequirement(name = "JWT")
+    @Operation(
+            summary = "Authentication",
+            description = "Login"
+    )
     @PostMapping("/login")
     public ResponseEntity<JWTAuthResponse> authenticate(@Valid @RequestBody LoginDto loginDto){
         String token = authService.login(loginDto);
@@ -31,6 +41,11 @@ public class AuthController {
         return ResponseEntity.ok(jwtAuthResponse);
     }
 
+    @SecurityRequirement(name = "JWT")
+    @Operation(
+            summary = "Registration",
+            description = "Add new User"
+    )
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@Valid @RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
