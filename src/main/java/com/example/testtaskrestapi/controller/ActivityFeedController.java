@@ -1,13 +1,9 @@
 package com.example.testtaskrestapi.controller;
 
+import com.example.testtaskrestapi.exception.APIException;
 import com.example.testtaskrestapi.model.Post;
 import com.example.testtaskrestapi.repository.PostRepository;
 import com.example.testtaskrestapi.repository.UserRepository;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +35,7 @@ public class ActivityFeedController {
     @GetMapping("/feed")
     public Page<Post> getFeed(@RequestParam(defaultValue = "0") int page,
                               @RequestParam(defaultValue = "2") int quantity,
-                              @AuthenticationPrincipal User user) {
+                              @AuthenticationPrincipal User user)  throws APIException {
             long id = userRepository.findByUsername(user.getUsername()).getId();
             Pageable pageBl = PageRequest.of(page, quantity);
             return postRepository.findLastPostsSubscribers(id,pageBl);

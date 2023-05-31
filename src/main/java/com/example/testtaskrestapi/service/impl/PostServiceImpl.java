@@ -13,9 +13,10 @@ import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
-    @Autowired
+
     private PostRepository postRepository;
 
+    @Autowired
     public PostServiceImpl(PostRepository postRepository) {
 
         this.postRepository = postRepository;
@@ -40,7 +41,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public String updatePost(PostDto postDto, long id, String username) {
+
         Post oldPost = postRepository.getById(id);
+        System.out.println(oldPost.getUser().getUsername());
+
         if(oldPost.getUser().getUsername().equals(username)) {
             oldPost.setText(postDto.getText());
             oldPost.setTitle(postDto.getTitle());

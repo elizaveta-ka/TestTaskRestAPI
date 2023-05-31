@@ -3,6 +3,7 @@ package com.example.testtaskrestapi.controller;
 import com.example.testtaskrestapi.dto.JWTAuthResponse;
 import com.example.testtaskrestapi.dto.LoginDto;
 import com.example.testtaskrestapi.dto.RegisterDto;
+import com.example.testtaskrestapi.exception.APIException;
 import com.example.testtaskrestapi.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -10,10 +11,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 
 @AllArgsConstructor
@@ -32,7 +33,7 @@ public class AuthController {
             description = "Login"
     )
     @PostMapping("/login")
-    public ResponseEntity<JWTAuthResponse> authenticate(@Valid @RequestBody LoginDto loginDto){
+    public ResponseEntity<JWTAuthResponse> authenticate(@RequestBody LoginDto loginDto, BindingResult bindingResult) throws APIException {
         String token = authService.login(loginDto);
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
@@ -47,7 +48,7 @@ public class AuthController {
             description = "Add new User"
     )
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@Valid @RequestBody RegisterDto registerDto){
+    public ResponseEntity<String> register( @RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
