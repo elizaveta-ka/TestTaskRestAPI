@@ -1,5 +1,6 @@
 package com.example.testtaskrestapi.controller;
 
+import com.example.testtaskrestapi.exception.APIException;
 import com.example.testtaskrestapi.model.HistoryMessage;
 import com.example.testtaskrestapi.repository.UserRepository;
 import com.example.testtaskrestapi.service.impl.HistoryMessageServiceImpl;
@@ -34,7 +35,7 @@ public class MessageController {
 
     @SecurityRequirement(name = "JWT")
     @GetMapping("/history/{id}")
-    public List<HistoryMessage> getMessageHistory(@PathVariable("id") long recipient_id, @AuthenticationPrincipal User sender) {
+    public List<HistoryMessage> getMessageHistory(@PathVariable("id") long recipient_id, @AuthenticationPrincipal User sender) throws APIException {
         com.example.testtaskrestapi.model.User user = userRepository.findByUsername(sender.getUsername());
         return historyMessageService.getMessageHistory(user.getId(), recipient_id);
     }

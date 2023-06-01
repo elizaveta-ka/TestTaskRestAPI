@@ -40,24 +40,14 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//        http.csrf().disable()
-//                .authorizeHttpRequests((authorize) -> {
-//                    authorize.requestMatchers("/api/auth/**").permitAll();
-//                    authorize.anyRequest().authenticated();
-//                });
-//        return http.build();
-//    }
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
+
                 .authorizeHttpRequests((authorize) ->
                         //authorize.anyRequest().authenticated()
-                        authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
 

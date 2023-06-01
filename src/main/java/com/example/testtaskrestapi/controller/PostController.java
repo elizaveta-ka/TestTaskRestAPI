@@ -1,6 +1,7 @@
 package com.example.testtaskrestapi.controller;
 
 import com.example.testtaskrestapi.dto.PostDto;
+import com.example.testtaskrestapi.exception.APIException;
 import com.example.testtaskrestapi.model.Post;
 import com.example.testtaskrestapi.model.User;
 import com.example.testtaskrestapi.repository.PostRepository;
@@ -46,7 +47,7 @@ public class PostController {
     )
     @PostMapping("/createPost")
     public ResponseEntity<String> savePost(@RequestBody PostDto postDto,
-                                           @AuthenticationPrincipal UserDetails userDetails){
+                                           @AuthenticationPrincipal UserDetails userDetails) {
 
         User user = userRepository.findByUsername(userDetails.getUsername());
         postService.createPost(postDto, user);
@@ -80,7 +81,7 @@ public class PostController {
             description = "User can delete his own post"
     )
     @DeleteMapping("/post/{id}")
-    private ResponseEntity<String> deletePost(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) {
+    private ResponseEntity<String> deletePost(@PathVariable("id") long id, @AuthenticationPrincipal UserDetails userDetails) throws APIException {
         String message = postService.deletePostById(id, userDetails.getUsername());
         return ResponseEntity.ok(message);
     }

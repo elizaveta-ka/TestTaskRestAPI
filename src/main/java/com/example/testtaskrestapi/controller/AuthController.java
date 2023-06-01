@@ -33,7 +33,7 @@ public class AuthController {
             description = "Login"
     )
     @PostMapping("/login")
-    public ResponseEntity<JWTAuthResponse> authenticate(@RequestBody LoginDto loginDto, BindingResult bindingResult) throws APIException {
+    public ResponseEntity<JWTAuthResponse> authenticate(@RequestBody LoginDto loginDto) throws APIException {
         String token = authService.login(loginDto);
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
@@ -48,7 +48,7 @@ public class AuthController {
             description = "Add new User"
     )
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register( @RequestBody RegisterDto registerDto){
+    public ResponseEntity<String> register( @RequestBody RegisterDto registerDto) throws APIException {
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
