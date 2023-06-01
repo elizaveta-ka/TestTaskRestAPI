@@ -11,15 +11,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 
 
 @AllArgsConstructor
-@Validated
 @ControllerAdvice
+@Validated
 @RestController
 @Tag(name="Authentication and Authorization Controller", description="Register/Login")
 @RequestMapping("/api/auth")
@@ -42,13 +42,15 @@ public class AuthController {
         return ResponseEntity.ok(jwtAuthResponse);
     }
 
+
     @SecurityRequirement(name = "JWT")
     @Operation(
             summary = "Registration",
             description = "Add new User"
     )
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register( @RequestBody RegisterDto registerDto) throws APIException {
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto) {
+
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

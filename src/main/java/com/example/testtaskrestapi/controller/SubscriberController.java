@@ -70,7 +70,7 @@ public class SubscriberController {
             userService.addAsFriend(currentUser, user);
             userService.subscribe(currentUser,user);
         }
-        return new ResponseEntity<>("This user dont be your subscriber",HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @SecurityRequirement(name = "JWT")
