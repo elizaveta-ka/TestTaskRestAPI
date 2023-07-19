@@ -9,12 +9,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 
 @AllArgsConstructor
@@ -49,7 +49,7 @@ public class AuthController {
             description = "Add new User"
     )
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto) {
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

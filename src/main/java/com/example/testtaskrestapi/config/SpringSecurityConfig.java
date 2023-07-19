@@ -46,8 +46,9 @@ public class SpringSecurityConfig {
         http.csrf().disable()
 
                 .authorizeHttpRequests((authorize) ->
+
                         //authorize.anyRequest().authenticated()
-                        authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+                        authorize.requestMatchers("/api/**").permitAll()
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
 
@@ -58,7 +59,6 @@ public class SpringSecurityConfig {
                 );
 
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
