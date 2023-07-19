@@ -49,6 +49,7 @@ public class SpringSecurityConfig {
 
                         //authorize.anyRequest().authenticated()
                         authorize.requestMatchers("/api/**").permitAll()
+//
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
 
@@ -59,6 +60,7 @@ public class SpringSecurityConfig {
                 );
 
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
